@@ -1,0 +1,73 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.Text;
+
+namespace ProductsServiceLibrary
+{
+    //Service contract describing the operations by the WCF service
+    [ServiceContract]
+    public interface IProductsService
+    {
+        //Get the product number of every product
+        [FaultContract(typeof(SystemFault))]
+        [FaultContract(typeof(DatabaseFault))]
+        [OperationContract]
+        List<string> ListProducts();
+
+        //Get the details of a single product
+        [OperationContract]
+        ProductData GetProduct(string productNumber);
+
+        //Get the current stock level of a product
+        [OperationContract]
+        int CurrentStockLevel(string productNumber);
+
+        //Change the stock level for a product
+        [OperationContract]
+        bool ChangeStockLevel(string productNumber, short newStockLevel, string shelf, int bin);
+
+    }
+
+    //Data contract describing the details of a product passed to client applications
+    [DataContract]
+    public class ProductData
+    {
+        [DataMember]
+        public string Name;
+
+        [DataMember]
+        public string ProductNumber;
+
+        [DataMember]
+        public string Color;
+
+        [DataMember]
+        public decimal ListPrice;
+    }
+
+    // Classes for passing fault information back to client applications
+    [DataContract]
+    public class SystemFault
+    {
+        [DataMember]
+        public string SystemOperation { get; set; }
+        [DataMember]
+        public string SystemReason { get; set; }
+        [DataMember]
+        public string SystemMessage { get; set; }
+    }
+
+    [DataContract]
+    public class DatabaseFault
+    {
+        [DataMember]
+        public string DbOperation { get; set; }
+        [DataMember]
+        public string DbReason { get; set; }
+        [DataMember]
+        public string DbMessage { get; set; }
+    }
+}
