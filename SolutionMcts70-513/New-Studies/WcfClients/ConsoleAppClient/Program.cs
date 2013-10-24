@@ -12,28 +12,50 @@ namespace ConsoleAppClient
     {
         static void Main(string[] args)
         {
-            var cf = new ChannelFactory<IEvalServiceChannel>("End4");
+            //var cf = new ChannelFactory<IEvalServiceChannel>("End4");
+            //var service = cf.CreateChannel();
 
-            var service = cf.CreateChannel();
+            var service = new EvalServiceClient("End4");
 
-            var newEval = new Eval
+            try
             {
-                Comments = "Testing",
-                Submitter = "Rafael",
-                Timesent = DateTime.Now
-            };
+                var newEval = new Eval
+                {
+                    Comments = "Testing",
+                    Submitter = "Rafael",
+                    Timesent = DateTime.Now
+                };
 
-            service.SubmitEval(newEval);
-            service.SubmitEval(newEval);
+                service.SubmitEval(newEval);
+                service.SubmitEval(newEval);
 
-            var evals = service.GetEvals();
+                var evals = service.GetEvals();
 
-            foreach (var eval in evals)
-            {
-                Console.WriteLine(eval.Submitter +  " " + eval.Comments);
+                foreach (var eval in evals)
+                {
+                    Console.WriteLine(eval.Submitter + " " + eval.Comments);
+                }
+
+                service.Close();
             }
-
-            service.Close();
+            catch (FaultException exception)
+            {
+                Console.WriteLine("Ops... Something went wrong");
+                Console.WriteLine(exception);
+                service.Abort();
+            }
+            catch (CommunicationException exception)
+            {
+                Console.WriteLine("Ops... Something went wrong");
+                Console.WriteLine(exception);
+                service.Abort();
+            }
+            catch (TimeoutException exception)
+            {
+                Console.WriteLine("Ops... Something went wrong");
+                Console.WriteLine(exception);
+                service.Abort();
+            }
 
             Console.ReadLine();
         }
