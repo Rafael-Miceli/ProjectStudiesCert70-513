@@ -9,106 +9,27 @@
 //------------------------------------------------------------------------------
 
 namespace ConsoleAppClient.EvaluateServiceReference {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Eval", Namespace="http://schemas.datacontract.org/2004/07/EvaluateService")]
-    [System.SerializableAttribute()]
-    public partial class Eval : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CommentsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SubmitterField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime TimesentField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Comments {
-            get {
-                return this.CommentsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CommentsField, value) != true)) {
-                    this.CommentsField = value;
-                    this.RaisePropertyChanged("Comments");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Submitter {
-            get {
-                return this.SubmitterField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SubmitterField, value) != true)) {
-                    this.SubmitterField = value;
-                    this.RaisePropertyChanged("Submitter");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Timesent {
-            get {
-                return this.TimesentField;
-            }
-            set {
-                if ((this.TimesentField.Equals(value) != true)) {
-                    this.TimesentField = value;
-                    this.RaisePropertyChanged("Timesent");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="EvaluateServiceReference.IEvalService")]
     public interface IEvalService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEvalService/SubmitEval", ReplyAction="http://tempuri.org/IEvalService/SubmitEvalResponse")]
-        void SubmitEval(ConsoleAppClient.EvaluateServiceReference.Eval eval);
+        void SubmitEval(EvaluateService.Eval eval);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEvalService/SubmitEval", ReplyAction="http://tempuri.org/IEvalService/SubmitEvalResponse")]
-        System.IAsyncResult BeginSubmitEval(ConsoleAppClient.EvaluateServiceReference.Eval eval, System.AsyncCallback callback, object asyncState);
+        System.IAsyncResult BeginSubmitEval(EvaluateService.Eval eval, System.AsyncCallback callback, object asyncState);
         
         void EndSubmitEval(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IEvalService/GetEvals", ReplyAction="http://tempuri.org/IEvalService/GetEvalsResponse")]
-        System.Collections.Generic.List<ConsoleAppClient.EvaluateServiceReference.Eval> GetEvals();
+        System.Collections.Generic.List<EvaluateService.Eval> GetEvals();
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="http://tempuri.org/IEvalService/GetEvals", ReplyAction="http://tempuri.org/IEvalService/GetEvalsResponse")]
         System.IAsyncResult BeginGetEvals(System.AsyncCallback callback, object asyncState);
         
-        System.Collections.Generic.List<ConsoleAppClient.EvaluateServiceReference.Eval> EndGetEvals(System.IAsyncResult result);
+        System.Collections.Generic.List<EvaluateService.Eval> EndGetEvals(System.IAsyncResult result);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -126,10 +47,10 @@ namespace ConsoleAppClient.EvaluateServiceReference {
             this.results = results;
         }
         
-        public System.Collections.Generic.List<ConsoleAppClient.EvaluateServiceReference.Eval> Result {
+        public System.Collections.Generic.List<EvaluateService.Eval> Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((System.Collections.Generic.List<ConsoleAppClient.EvaluateServiceReference.Eval>)(this.results[0]));
+                return ((System.Collections.Generic.List<EvaluateService.Eval>)(this.results[0]));
             }
         }
     }
@@ -173,12 +94,12 @@ namespace ConsoleAppClient.EvaluateServiceReference {
         
         public event System.EventHandler<GetEvalsCompletedEventArgs> GetEvalsCompleted;
         
-        public void SubmitEval(ConsoleAppClient.EvaluateServiceReference.Eval eval) {
+        public void SubmitEval(EvaluateService.Eval eval) {
             base.Channel.SubmitEval(eval);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.IAsyncResult BeginSubmitEval(ConsoleAppClient.EvaluateServiceReference.Eval eval, System.AsyncCallback callback, object asyncState) {
+        public System.IAsyncResult BeginSubmitEval(EvaluateService.Eval eval, System.AsyncCallback callback, object asyncState) {
             return base.Channel.BeginSubmitEval(eval, callback, asyncState);
         }
         
@@ -188,7 +109,7 @@ namespace ConsoleAppClient.EvaluateServiceReference {
         }
         
         private System.IAsyncResult OnBeginSubmitEval(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            ConsoleAppClient.EvaluateServiceReference.Eval eval = ((ConsoleAppClient.EvaluateServiceReference.Eval)(inValues[0]));
+            EvaluateService.Eval eval = ((EvaluateService.Eval)(inValues[0]));
             return this.BeginSubmitEval(eval, callback, asyncState);
         }
         
@@ -204,11 +125,11 @@ namespace ConsoleAppClient.EvaluateServiceReference {
             }
         }
         
-        public void SubmitEvalAsync(ConsoleAppClient.EvaluateServiceReference.Eval eval) {
+        public void SubmitEvalAsync(EvaluateService.Eval eval) {
             this.SubmitEvalAsync(eval, null);
         }
         
-        public void SubmitEvalAsync(ConsoleAppClient.EvaluateServiceReference.Eval eval, object userState) {
+        public void SubmitEvalAsync(EvaluateService.Eval eval, object userState) {
             if ((this.onBeginSubmitEvalDelegate == null)) {
                 this.onBeginSubmitEvalDelegate = new BeginOperationDelegate(this.OnBeginSubmitEval);
             }
@@ -222,7 +143,7 @@ namespace ConsoleAppClient.EvaluateServiceReference {
                         eval}, this.onEndSubmitEvalDelegate, this.onSubmitEvalCompletedDelegate, userState);
         }
         
-        public System.Collections.Generic.List<ConsoleAppClient.EvaluateServiceReference.Eval> GetEvals() {
+        public System.Collections.Generic.List<EvaluateService.Eval> GetEvals() {
             return base.Channel.GetEvals();
         }
         
@@ -232,7 +153,7 @@ namespace ConsoleAppClient.EvaluateServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        public System.Collections.Generic.List<ConsoleAppClient.EvaluateServiceReference.Eval> EndGetEvals(System.IAsyncResult result) {
+        public System.Collections.Generic.List<EvaluateService.Eval> EndGetEvals(System.IAsyncResult result) {
             return base.Channel.EndGetEvals(result);
         }
         
@@ -241,7 +162,7 @@ namespace ConsoleAppClient.EvaluateServiceReference {
         }
         
         private object[] OnEndGetEvals(System.IAsyncResult result) {
-            System.Collections.Generic.List<ConsoleAppClient.EvaluateServiceReference.Eval> retVal = this.EndGetEvals(result);
+            System.Collections.Generic.List<EvaluateService.Eval> retVal = this.EndGetEvals(result);
             return new object[] {
                     retVal};
         }
